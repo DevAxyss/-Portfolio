@@ -1,0 +1,766 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+
+<head>
+  <!-- ═══════════════════════════════════════════════════════════
+       CONFIGURAÇÕES BÁSICAS DO DOCUMENTO
+  ═══════════════════════════════════════════════════════════ -->
+
+  <!-- Define o conjunto de caracteres como UTF-8 (suporte a acentos e caracteres especiais) -->
+  <meta charset="UTF-8">
+
+  <!-- Garante que o site se adapte ao tamanho da tela do dispositivo (responsividade mobile) -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Compatibilidade com versões antigas do Internet Explorer -->
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+
+  <!-- ═══════════════════════════════════════════════════════════
+       SEO — METADADOS BÁSICOS
+       Esses dados aparecem nos resultados de busca do Google
+  ═══════════════════════════════════════════════════════════ -->
+
+  <!-- Título da página que aparece na aba do navegador e no Google -->
+  <!-- PERSONALIZE: substitua [Cidade] pela cidade real do corretor -->
+  <title>Carlos Mendes | Corretor Imobiliário em [Cidade] — CRECI 12.345-F</title>
+
+  <!-- Descrição que aparece no Google abaixo do título — máx 160 caracteres -->
+  <!-- PERSONALIZE: adapte com a cidade, especialidades e CRECI real -->
+  <meta name="description" content="Carlos Mendes, corretor imobiliário com 10 anos de experiência em [Cidade]. Especialista em compra, venda, locação e financiamento imobiliário. CRECI 12.345-F. Atendimento via WhatsApp.">
+
+  <!-- Palavras-chave secundárias (menor peso no Google moderno, mas ainda útil) -->
+  <!-- PERSONALIZE: adicione o nome da cidade e especialidades reais -->
+  <meta name="keywords" content="corretor imobiliário, imóveis em [cidade], comprar imóvel, vender imóvel, financiamento imobiliário, CRECI, Carlos Mendes corretor">
+
+  <!-- Nome do autor/responsável pela página -->
+  <meta name="author" content="Carlos Mendes">
+
+  <!-- Instrução para robôs de busca: indexar a página e seguir todos os links -->
+  <!-- max-snippet, max-image-preview e max-video-preview permitem previews ricos no Google -->
+  <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+
+  <!-- Cor da barra de endereço no Chrome Mobile (Android) -->
+  <meta name="theme-color" content="#F7F3EE">
+
+  <!-- URL canônica: evita conteúdo duplicado quando há múltiplas URLs para a mesma página -->
+  <!-- PERSONALIZE: substitua pelo domínio real -->
+  <link rel="canonical" href="https://carlosmendes.com.br/">
+
+
+  <!-- ═══════════════════════════════════════════════════════════
+       OPEN GRAPH — COMPARTILHAMENTO NO FACEBOOK / WHATSAPP
+       Controla como o link aparece quando compartilhado nas redes sociais
+  ═══════════════════════════════════════════════════════════ -->
+
+  <!-- Tipo de conteúdo -->
+  <meta property="og:type" content="website">
+  <!-- URL oficial da página -->
+  <meta property="og:url" content="https://carlosmendes.com.br/">
+  <!-- Título exibido no preview de compartilhamento -->
+  <meta property="og:title" content="Carlos Mendes | Corretor Imobiliário — CRECI 12.345-F">
+  <!-- Descrição no preview de compartilhamento -->
+  <meta property="og:description" content="Especialista em compra, venda e locação de imóveis em [Cidade]. Atendimento personalizado e transparente.">
+  <!-- Imagem exibida no preview — PERSONALIZE: crie uma imagem 1200×630px e suba no servidor -->
+  <meta property="og:image" content="https://carlosmendes.com.br/og-image.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <!-- Idioma do conteúdo para o Facebook -->
+  <meta property="og:locale" content="pt_BR">
+  <!-- Nome do site (aparece no preview) -->
+  <meta property="og:site_name" content="Carlos Mendes Corretor">
+
+
+  <!-- ═══════════════════════════════════════════════════════════
+       TWITTER CARD — COMPARTILHAMENTO NO TWITTER/X
+  ═══════════════════════════════════════════════════════════ -->
+
+  <!-- summary_large_image = imagem grande no preview -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Carlos Mendes | Corretor Imobiliário">
+  <meta name="twitter:description" content="Especialista em compra, venda e locação de imóveis em [Cidade].">
+  <meta name="twitter:image" content="https://carlosmendes.com.br/og-image.jpg">
+
+
+  <!-- ═══════════════════════════════════════════════════════════
+       SCHEMA.ORG — DADOS ESTRUTURADOS (JSON-LD)
+       Permite que o Google entenda que esta é a página de um Corretor Imobiliário
+       e exiba informações ricas nos resultados (estrelas, telefone, endereço)
+       PERSONALIZE: atualize todos os campos com os dados reais
+  ═══════════════════════════════════════════════════════════ -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "RealEstateAgent",
+    "name": "Carlos Mendes",
+    "description": "Corretor imobiliário com 10 anos de experiência em [Cidade], especializado em compra, venda, locação e financiamento.",
+    "url": "https://carlosmendes.com.br",
+    "telephone": "+55-83-99999-9999",
+    "email": "carlos@exemplo.com",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "[Cidade]",
+      "addressRegion": "[Estado]",
+      "addressCountry": "BR"
+    },
+    "sameAs": ["https://instagram.com/carlosmendes.corretor"],
+    "hasCredential": {
+      "@type": "EducationalOccupationalCredential",
+      "credentialCategory": "license",
+      "name": "CRECI 12.345-F"
+    },
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "4.9",
+      "reviewCount": "87"
+    }
+  }
+  </script>
+
+  <!-- Schema de FAQ: cada pergunta/resposta pode aparecer diretamente nos resultados do Google -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Qual o primeiro passo para comprar um imóvel?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "O primeiro passo é entender seu perfil financeiro e definir o valor que pode investir. Em seguida, agendamos uma conversa para mapear suas necessidades e iniciar a busca."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Posso usar o FGTS na compra do imóvel?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Sim! O FGTS pode ser usado para entrada, amortização do saldo devedor ou quitação, desde que atendidas as condições da Caixa Econômica Federal."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Quanto custa contratar um corretor de imóveis?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "A comissão é regulamentada pelo CRECI e normalmente paga pelo vendedor. Para o comprador, a intermediação geralmente não gera custo adicional."
+        }
+      }
+    ]
+  }
+  </script>
+
+
+  <!-- ═══════════════════════════════════════════════════════════
+       FONTES — CARREGAMENTO OTIMIZADO PARA PERFORMANCE
+       Técnica: media="print" + onload evita bloquear a renderização
+       (a página aparece antes mesmo da fonte terminar de carregar)
+  ═══════════════════════════════════════════════════════════ -->
+
+  <!-- Pré-conecta ao servidor do Google Fonts para reduzir latência DNS -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <!-- Pré-carrega o CSS das fontes (baixa em paralelo sem bloquear o render) -->
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;1,500&family=Plus+Jakarta+Sans:wght@400;500;600&display=swap">
+
+  <!-- Carrega a fonte de forma não-bloqueante:
+       começa como media="print" (ignorada no render), e quando carrega muda para media="all" -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;1,500&family=Plus+Jakarta+Sans:wght@400;500;600&display=swap" media="print" onload="this.media='all'">
+
+  <!-- Fallback para usuários sem JavaScript: carrega a fonte normalmente -->
+  <noscript>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;1,500&family=Plus+Jakarta+Sans:wght@400;500;600&display=swap">
+  </noscript>
+
+  <!-- Estilos do portfólio -->
+  <link rel="stylesheet" href="Style.css">
+</head>
+
+<body>
+
+  <!-- Link de acessibilidade invisível — aparece apenas ao navegar via teclado (Tab)
+       Permite usuários com leitores de tela pular direto para o conteúdo -->
+  <a class="skip-link" href="#main-content">Ir para o conteúdo principal</a>
+
+
+  <!-- ══════════════════════════════════════════════════════════
+       NAVEGAÇÃO PRINCIPAL FIXA
+  ══════════════════════════════════════════════════════════ -->
+  <nav role="navigation" aria-label="Navegação principal">
+
+    <!-- Marca: logo da empresa + divisor + nome do corretor -->
+    <div class="nav-brand">
+
+      <!-- ── SLOT LOGO DA EMPRESA NA NAV ──
+           COMO USAR: substitua o <span> abaixo por:
+           <img class="nav-logo-empresa" src="logo-imobiliaria.png" alt="Nome da Imobiliária" width="120" height="34">
+      -->
+      <div class="nav-logo-empresa">
+        <span class="nav-logo-placeholder" aria-label="Espaço para logo da imobiliária">Logo Empresa</span>
+      </div>
+
+      <!-- Divisor vertical entre logo e nome -->
+      <div class="nav-divider" aria-hidden="true"></div>
+
+      <!-- Nome do corretor na nav -->
+      <span class="nav-nome">Carlos Mendes</span>
+    </div>
+
+    <!-- Links de navegação (DIV em vez de nav para evitar nav aninhado — HTML inválido) -->
+    <div class="nav-links" aria-label="Links de navegação">
+      <a href="#sobre">Sobre</a>
+      <a href="#servicos">Serviços</a>
+      <a href="#faq">FAQ</a>
+      <a href="#feedbacks">Avaliações</a>
+      <a href="#contato">Contato</a>
+    </div>
+
+    <!-- Botão WhatsApp no canto direito
+         target="_blank" abre em nova aba | rel="noopener noreferrer" previne vulnerabilidade de segurança
+         PERSONALIZE: substitua o número pelo real no formato DDI+DDD+número -->
+    <a href="https://wa.me/5583999999999?text=Olá%2C%20vim%20pelo%20site%20e%20gostaria%20de%20mais%20informações!"
+       class="nav-cta" target="_blank" rel="noopener noreferrer"
+       aria-label="Abrir WhatsApp para falar com Carlos Mendes">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
+        <path d="M12 0C5.373 0 0 5.373 0 12c0 2.025.507 3.933 1.395 5.608L0 24l6.545-1.376C8.18 23.516 10.05 24 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.85 0-3.612-.478-5.153-1.32l-.37-.219-3.821.802.835-3.706-.24-.381C2.493 15.546 2 13.83 2 12 2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/>
+      </svg>
+      WhatsApp
+    </a>
+
+    <!-- Botão hambúrguer — aria-expanded indica ao leitor de tela se o menu está aberto -->
+    <button class="hamburger" onclick="toggleMenu()" aria-expanded="false" aria-controls="mobileMenu" aria-label="Abrir menu">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+  </nav>
+
+
+  <!-- ══════════════════════════════════════════════════════════
+       MENU MOBILE (OVERLAY)
+       role="dialog" e aria-modal informam leitores de tela que é um modal
+  ══════════════════════════════════════════════════════════ -->
+  <div class="mob-menu" id="mobileMenu" role="dialog" aria-modal="true" aria-label="Menu de navegação">
+    <!-- Botão fechar (×) no canto superior direito -->
+    <button class="mob-close" onclick="toggleMenu()" aria-label="Fechar menu">✕</button>
+
+    <!-- Links — onclick fecha o menu ao navegar para uma seção -->
+    <a href="#sobre"     onclick="toggleMenu()">Sobre</a>
+    <a href="#servicos"  onclick="toggleMenu()">Serviços</a>
+    <a href="#faq"       onclick="toggleMenu()">FAQ</a>
+    <a href="#feedbacks" onclick="toggleMenu()">Avaliações</a>
+    <a href="#contato"   onclick="toggleMenu()">Contato</a>
+
+    <!-- CTA WhatsApp no menu mobile -->
+    <a href="https://wa.me/5583999999999" class="btn-primary mob-cta"
+       target="_blank" rel="noopener noreferrer" onclick="toggleMenu()">
+      Falar no WhatsApp
+    </a>
+  </div>
+
+
+  <!-- ══════════════════════════════════════════════════════════
+       CONTEÚDO PRINCIPAL
+       id="main-content" é o destino do skip-link de acessibilidade
+  ══════════════════════════════════════════════════════════ -->
+  <main id="main-content">
+
+
+    <!-- ═══════════════════════════════════════════════════════
+         HERO — PRIMEIRA DOBRA
+         Primeira coisa que o visitante vê ao acessar o site
+    ═══════════════════════════════════════════════════════ -->
+    <section id="hero" aria-label="Apresentação">
+
+      <!-- Coluna esquerda: conteúdo textual + CTAs + estatísticas -->
+      <div class="hero-left">
+        <!-- Tag de credencial acima do título -->
+        <span class="hero-eyebrow">Corretor Imobiliário · CRECI 12.345-F</span>
+
+        <!-- H1: deve existir apenas uma vez por página — fundamental para SEO -->
+        <h1 class="hero-title">
+          Encontre o imóvel<br>
+          <em>perfeito</em> para<br>
+          sua história
+        </h1>
+
+        <!-- Descrição resumida — PERSONALIZE com a cidade real -->
+        <p class="hero-desc">
+          Mais de 10 anos conectando famílias ao imóvel dos seus sonhos em [Cidade].
+          Atendimento personalizado, transparente e com resultados reais.
+        </p>
+
+        <!-- Dois botões: primário (WhatsApp) e secundário (rolar para Sobre) -->
+        <div class="hero-ctas">
+          <!-- Botão principal: abre WhatsApp com mensagem pré-preenchida
+               O texto da mensagem está URL-encoded (espaços viram %20, etc.) -->
+          <a href="https://wa.me/5583999999999?text=Olá%2C%20vim%20pelo%20site%20e%20gostaria%20de%20mais%20informações!"
+             class="btn-primary" target="_blank" rel="noopener noreferrer"
+             aria-label="Falar com Carlos Mendes pelo WhatsApp">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
+              <path d="M12 0C5.373 0 0 5.373 0 12c0 2.025.507 3.933 1.395 5.608L0 24l6.545-1.376C8.18 23.516 10.05 24 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.85 0-3.612-.478-5.153-1.32l-.37-.219-3.821.802.835-3.706-.24-.381C2.493 15.546 2 13.83 2 12 2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/>
+            </svg>
+            Falar no WhatsApp
+          </a>
+          <!-- Botão secundário: ancora para a seção #sobre -->
+          <a href="#sobre" class="btn-ghost">Conheça meu trabalho</a>
+        </div>
+
+        <!-- Estatísticas em destaque -->
+        <div class="hero-stats" aria-label="Estatísticas">
+          <div>
+            <div class="stat-num">200<span aria-hidden="true">+</span></div>
+            <div class="stat-lbl">Imóveis vendidos</div>
+          </div>
+          <div>
+            <div class="stat-num">10</div>
+            <div class="stat-lbl">Anos de experiência</div>
+          </div>
+          <div>
+            <div class="stat-num">98%</div>
+            <div class="stat-lbl">Clientes satisfeitos</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Coluna direita: foto do corretor como elemento visual
+           aria-hidden pois é decorativa — conteúdo já está no texto -->
+      <div class="hero-right" aria-hidden="true">
+        <div class="hero-photo-wrap">
+          <!-- ── FOTO 2 — PNG do corretor ──
+               Substitua src pelo arquivo real (PNG fundo transparente, 600×900px)
+               loading="eager" + fetchpriority="high" = carrega imediatamente (é o LCP da página) -->
+          <img
+            class="foto-hero"
+            src="foto-corretor-hero.png"
+            alt="Carlos Mendes, corretor imobiliário, de braços cruzados"
+            width="440" height="660"
+            loading="eager"
+            fetchpriority="high"
+            decoding="async"
+            onerror="this.style.background='var(--sand-mid)';this.removeAttribute('src')"
+          >
+        </div>
+        <!-- Badge CRECI flutuante sobre a foto -->
+        <div class="badge-creci" aria-label="CRECI ativo">
+          <div class="badge-dot" aria-hidden="true"></div>
+          <div>
+            <div class="badge-label">Carlos Mendes</div>
+            <div class="badge-sub">CRECI 12.345-F · Ativo</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ═══════════════════════════════════════════════════════
+         BANNER FULL-WIDTH — FOTO 1
+         Imagem panorâmica do escritório/imóvel que vai de ponta a ponta
+         PERSONALIZE: substitua src pelo arquivo real (1600×480px JPG)
+    ═══════════════════════════════════════════════════════ -->
+    <div id="banner-full" role="img" aria-label="Ambiente de trabalho de Carlos Mendes">
+      <img
+        class="banner-img"
+        src="banner-escritorio.jpg"
+        alt="Escritório e imóveis atendidos por Carlos Mendes em [Cidade]"
+        width="1600" height="480"
+        loading="eager"
+        fetchpriority="high"
+        decoding="async"
+        onerror="this.style.display='none'; this.parentElement.querySelector('.banner-placeholder').style.display='flex';"
+      >
+      <!-- Placeholder: visível quando a imagem não carrega (onerror) -->
+      <div class="banner-placeholder" style="display:none;" aria-hidden="true">
+        <svg width="56" height="56" viewBox="0 0 24 24" fill="none" stroke="#B07D4F" stroke-width="1">
+          <rect x="3" y="3" width="18" height="18" rx="2"/>
+          <circle cx="8.5" cy="8.5" r="1.5"/>
+          <path d="M21 15l-5-5L5 21"/>
+        </svg>
+        <span>Foto panorâmica — escritório / imóvel</span>
+      </div>
+      <!-- Overlay com texto sobre a imagem -->
+      <div class="banner-overlay" aria-hidden="true">
+        <span class="banner-tag">Corretor Imobiliário · [Cidade]</span>
+        <p class="banner-quote">"Seu imóvel ideal<br>começa com uma conversa."</p>
+      </div>
+    </div>
+
+
+    <!-- ═══════════════════════════════════════════════════════
+         SOBRE MIM
+         aria-labelledby="sobre-titulo" associa a section ao seu H2 para leitores de tela
+    ═══════════════════════════════════════════════════════ -->
+    <section id="sobre" aria-labelledby="sobre-titulo">
+
+      <!-- Coluna esquerda: texto + credenciais -->
+      <div class="sobre-text fade-in">
+        <span class="section-eyebrow">Quem sou eu</span>
+        <h2 class="section-title" id="sobre-titulo">
+          Uma trajetória construída<br>em <em>confiança</em>
+        </h2>
+        <div class="accent-bar" aria-hidden="true"></div>
+
+        <!-- Texto biográfico — PERSONALIZE com cidade e especialidades reais -->
+        <p>
+          Sou Carlos Mendes, corretor imobiliário com mais de 10 anos de experiência no mercado de [Cidade].
+          Especializado em imóveis residenciais e comerciais, ajudo clientes a encontrar não apenas um imóvel,
+          mas o lugar certo para cada momento da vida.
+        </p>
+        <p>
+          Meu compromisso vai além da transação: ofereço orientação completa — do primeiro contato até
+          a entrega das chaves — com transparência e segurança em cada etapa do processo.
+        </p>
+
+        <!-- Lista de credenciais com ícone + nome + descrição -->
+        <ul class="creds" aria-label="Credenciais e diferenciais">
+          <li class="cred-row">
+            <div class="cred-ic" aria-hidden="true">🏆</div>
+            <div>
+              <div class="cred-name">CRECI 12.345-F — Ativo</div>
+              <div class="cred-desc">Credenciado e regular junto ao Conselho Regional de Corretores</div>
+            </div>
+          </li>
+          <li class="cred-row">
+            <div class="cred-ic" aria-hidden="true">🏠</div>
+            <div>
+              <div class="cred-name">200+ negociações concluídas</div>
+              <div class="cred-desc">Histórico sólido em imóveis residenciais e comerciais</div>
+            </div>
+          </li>
+          <li class="cred-row">
+            <div class="cred-ic" aria-hidden="true">💰</div>
+            <div>
+              <div class="cred-name">Especialista em Financiamento</div>
+              <div class="cred-desc">Caixa, FGTS, Minha Casa Minha Vida e consórcio</div>
+            </div>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Coluna direita: foto do corretor sobre fundo decorativo -->
+      <div class="sobre-visual fade-in" aria-hidden="true">
+        <div class="sobre-photo-frame">
+          <!-- ── FOTO 3 — PNG do corretor de braços cruzados ou apontando ──
+               Substitua src pelo arquivo real (PNG fundo transparente, 600×750px)
+               loading="lazy" posterga o carregamento (elemento abaixo do fold) -->
+          <img
+            class="foto-sobre"
+            src="foto-corretor-sobre.png"
+            alt="Carlos Mendes de braços cruzados, corretor imobiliário em [Cidade]"
+            width="600" height="750"
+            loading="lazy"
+            decoding="async"
+            onerror="this.style.background='var(--sand-mid)';this.removeAttribute('src')"
+          >
+        </div>
+        <!-- Card dourado flutuante no canto inferior direito -->
+        <div class="exp-card" aria-label="10 anos de experiência">
+          <div class="exp-num">10</div>
+          <div class="exp-lbl">anos de<br>experiência</div>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ═══════════════════════════════════════════════════════
+         SERVIÇOS
+    ═══════════════════════════════════════════════════════ -->
+    <section id="servicos" aria-labelledby="servicos-titulo">
+      <div class="section-header fade-in">
+        <span class="section-eyebrow">O que ofereço</span>
+        <h2 class="section-title" id="servicos-titulo">Serviços <em>especializados</em></h2>
+        <div class="accent-bar"></div>
+      </div>
+
+      <!-- article é o elemento semântico correto para conteúdo autônomo como um card -->
+      <div class="services-grid">
+        <article class="service-card fade-in">
+          <div class="svc-icon" aria-hidden="true">🏡</div>
+          <h3 class="svc-name">Compra &amp; Venda</h3><!-- &amp; é o escape correto para & em HTML -->
+          <p class="svc-desc">Assessoria completa para compra ou venda do seu imóvel. Avaliação de mercado, negociação estratégica e toda a documentação com segurança jurídica.</p>
+          <a href="#contato" class="svc-link" aria-label="Saiba mais sobre compra e venda de imóveis">Saiba mais →</a>
+        </article>
+        <article class="service-card fade-in">
+          <div class="svc-icon" aria-hidden="true">💰</div>
+          <h3 class="svc-name">Financiamento</h3>
+          <p class="svc-desc">Orientação nas melhores linhas de crédito disponíveis: Caixa Econômica Federal, FGTS, Minha Casa Minha Vida e consórcio imobiliário.</p>
+          <a href="#contato" class="svc-link" aria-label="Saiba mais sobre financiamento imobiliário">Saiba mais →</a>
+        </article>
+        <article class="service-card fade-in">
+          <div class="svc-icon" aria-hidden="true">🔑</div>
+          <h3 class="svc-name">Locação</h3>
+          <p class="svc-desc">Intermediação de contratos de aluguel com análise de perfil do inquilino, garantias locatícias e gestão completa de documentos.</p>
+          <a href="#contato" class="svc-link" aria-label="Saiba mais sobre locação de imóveis">Saiba mais →</a>
+        </article>
+      </div>
+    </section>
+
+
+    <!-- ═══════════════════════════════════════════════════════
+         FAQ — PERGUNTAS FREQUENTES
+         As perguntas também estão no Schema.org JSON-LD no <head>
+         para aparecerem diretamente nos resultados do Google
+    ═══════════════════════════════════════════════════════ -->
+    <section id="faq" aria-labelledby="faq-titulo">
+      <div class="faq-inner">
+        <div class="fade-in" style="margin-bottom:44px;">
+          <span class="section-eyebrow">Dúvidas comuns</span>
+          <h2 class="section-title" id="faq-titulo">Perguntas <em>frequentes</em></h2>
+          <div class="accent-bar"></div>
+        </div>
+
+        <div class="faq-list fade-in" role="list">
+
+          <!-- Cada item FAQ: botão clicável (pergunta) + div oculta (resposta)
+               onclick passa o elemento pai para toggleFaq() no JS -->
+          <div class="faq-item" role="listitem">
+            <button class="faq-q" onclick="toggleFaq(this.parentElement)" aria-expanded="false">
+              Qual o primeiro passo para comprar um imóvel?
+              <span class="faq-icon" aria-hidden="true">+</span>
+            </button>
+            <div class="faq-a" role="region">
+              O primeiro passo é entender seu perfil financeiro e definir o valor que pode investir.
+              Em seguida, agendamos uma conversa para mapear suas necessidades e iniciar a busca pelo imóvel ideal.
+            </div>
+          </div>
+
+          <div class="faq-item" role="listitem">
+            <button class="faq-q" onclick="toggleFaq(this.parentElement)" aria-expanded="false">
+              Posso usar o FGTS na compra do imóvel?
+              <span class="faq-icon" aria-hidden="true">+</span>
+            </button>
+            <div class="faq-a" role="region">
+              Sim! O FGTS pode ser utilizado para entrada, amortizar o saldo devedor ou quitar o financiamento,
+              desde que atendidas as condições da Caixa Econômica Federal. Oriento você em cada etapa desse processo.
+            </div>
+          </div>
+
+          <div class="faq-item" role="listitem">
+            <button class="faq-q" onclick="toggleFaq(this.parentElement)" aria-expanded="false">
+              Quanto custa contratar seus serviços?
+              <span class="faq-icon" aria-hidden="true">+</span>
+            </button>
+            <div class="faq-a" role="region">
+              A comissão do corretor é regulamentada pelo CRECI e normalmente é paga pelo vendedor.
+              Para o comprador, o serviço de intermediação geralmente não gera custo adicional.
+            </div>
+          </div>
+
+          <div class="faq-item" role="listitem">
+            <button class="faq-q" onclick="toggleFaq(this.parentElement)" aria-expanded="false">
+              Qual região você atende?
+              <span class="faq-icon" aria-hidden="true">+</span>
+            </button>
+            <div class="faq-a" role="region">
+              Atuo principalmente em [Cidade] e região. Entre em contato e me conte onde está
+              buscando seu imóvel — será um prazer te orientar!
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ═══════════════════════════════════════════════════════
+         FEEDBACKS / DEPOIMENTOS
+    ═══════════════════════════════════════════════════════ -->
+    <section id="feedbacks" aria-labelledby="feedbacks-titulo">
+      <div class="section-header fade-in">
+        <span class="section-eyebrow">Depoimentos</span>
+        <h2 class="section-title" id="feedbacks-titulo">O que dizem meus <em>clientes</em></h2>
+        <div class="accent-bar"></div>
+      </div>
+
+      <div class="testimonials" aria-label="Avaliações de clientes">
+        <!-- blockquote é o elemento semântico correto para citações -->
+        <article class="t-card fade-in">
+          <div class="t-stars" aria-label="5 estrelas">★★★★★</div>
+          <blockquote class="t-text">"O Carlos foi incrível durante todo o processo de compra do nosso apartamento. Nos guiou com paciência em cada etapa e conseguimos um preço excelente!"</blockquote>
+          <div class="t-author">
+            <div class="t-avatar" aria-hidden="true">A</div><!-- inicial do nome -->
+            <div><div class="t-name">Ana Paula</div><div class="t-loc">São Paulo, SP</div></div>
+          </div>
+        </article>
+
+        <article class="t-card fade-in">
+          <div class="t-stars" aria-label="5 estrelas">★★★★★</div>
+          <blockquote class="t-text">"Profissional muito competente e honesto. Vendeu meu imóvel em menos de 30 dias pelo valor que eu precisava. Recomendo sem hesitar!"</blockquote>
+          <div class="t-author">
+            <div class="t-avatar" aria-hidden="true">R</div>
+            <div><div class="t-name">Roberto Lima</div><div class="t-loc">Campinas, SP</div></div>
+          </div>
+        </article>
+
+        <article class="t-card fade-in">
+          <div class="t-stars" aria-label="5 estrelas">★★★★★</div>
+          <blockquote class="t-text">"Finalmente realizei o sonho da casa própria. O Carlos me orientou no financiamento e tornou tudo muito mais simples do que eu imaginava."</blockquote>
+          <div class="t-author">
+            <div class="t-avatar" aria-hidden="true">M</div>
+            <div><div class="t-name">Mariana Costa</div><div class="t-loc">Curitiba, PR</div></div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+
+    <!-- ═══════════════════════════════════════════════════════
+         CONTATO
+         Grid de 2 colunas:
+         - Esquerda: citação + canais diretos (WhatsApp, Instagram, E-mail)
+         - Direita: formulário que monta mensagem e redireciona para o WhatsApp
+    ═══════════════════════════════════════════════════════ -->
+    <section id="contato" aria-labelledby="contato-titulo">
+      <div class="contato-grid">
+
+        <!-- Coluna esquerda: info e canais -->
+        <div class="contact-info">
+          <span class="section-eyebrow">Vamos conversar</span>
+          <h2 class="section-title" id="contato-titulo">Entre em <em>contato</em></h2>
+          <div class="accent-bar"></div>
+
+          <!-- Card escuro com citação -->
+          <div class="contact-callout" aria-hidden="true">
+            <p class="contact-callout-quote">"Seu imóvel ideal começa com uma conversa — estou aqui para guiar cada passo."</p>
+            <span class="contact-callout-name">— Carlos Mendes · Corretor CRECI 12.345-F</span>
+          </div>
+
+          <p>Seja para comprar, vender ou tirar dúvidas — estou disponível para te atender com atenção e agilidade.</p>
+
+          <!-- Canais de contato como DIV (não nav) para evitar conflito com a nav principal -->
+          <div class="channels" aria-label="Canais de contato">
+
+            <!-- PERSONALIZE: substitua o número pelo real no formato DDI+DDD+número -->
+            <a href="https://wa.me/5583999999999?text=Olá%2C%20vim%20pelo%20site!" class="ch-item"
+               target="_blank" rel="noopener noreferrer" aria-label="Falar pelo WhatsApp">
+              <div class="ch-ic" aria-hidden="true">💬</div>
+              <div>
+                <div class="ch-lbl">WhatsApp</div>
+                <div class="ch-val">(83) 9 9999-9999</div><!-- PERSONALIZE -->
+              </div>
+            </a>
+
+            <!-- PERSONALIZE: substitua pelo perfil real -->
+            <a href="https://instagram.com/carlosmendes.corretor" class="ch-item"
+               target="_blank" rel="noopener noreferrer" aria-label="Ver perfil no Instagram">
+              <div class="ch-ic" aria-hidden="true">📸</div>
+              <div>
+                <div class="ch-lbl">Instagram</div>
+                <div class="ch-val">@carlosmendes.corretor</div><!-- PERSONALIZE -->
+              </div>
+            </a>
+
+            <!-- PERSONALIZE: substitua pelo e-mail real -->
+            <a href="mailto:carlos@exemplo.com" class="ch-item" aria-label="Enviar e-mail">
+              <div class="ch-ic" aria-hidden="true">✉️</div>
+              <div>
+                <div class="ch-lbl">E-mail</div>
+                <div class="ch-val">carlos@exemplo.com</div><!-- PERSONALIZE -->
+              </div>
+            </a>
+          </div>
+        </div>
+
+        <!-- Coluna direita: formulário de contato
+             Ao enviar, os dados são montados em uma mensagem e enviados pelo WhatsApp
+             (não usa backend — tudo é feito no JS via link wa.me) -->
+        <div class="form" role="form" aria-label="Formulário de contato">
+
+          <!-- Linha com dois campos lado a lado: nome + telefone -->
+          <div class="form-row">
+            <div class="fg">
+              <!-- for="f-nome" conecta o label ao input (clique no label foca o campo) -->
+              <label for="f-nome">Seu nome</label>
+              <!-- autocomplete="name" ajuda o navegador a preencher automaticamente -->
+              <input id="f-nome" type="text" name="nome" placeholder="João da Silva" autocomplete="name" required>
+            </div>
+            <div class="fg">
+              <label for="f-tel">Telefone</label>
+              <!-- type="tel" exibe teclado numérico no mobile -->
+              <input id="f-tel" type="tel" name="telefone" placeholder="(00) 9 0000-0000" autocomplete="tel" required>
+            </div>
+          </div>
+
+          <!-- Select de tipo de interesse -->
+          <div class="fg">
+            <label for="f-interesse">Interesse</label>
+            <select id="f-interesse" name="interesse" required>
+              <option value="" disabled selected>Selecione uma opção</option>
+              <option value="comprar">Comprar imóvel</option>
+              <option value="vender">Vender imóvel</option>
+              <option value="alugar">Alugar imóvel</option>
+              <option value="financiamento">Financiamento</option>
+              <option value="outro">Outro</option>
+            </select>
+          </div>
+
+          <!-- Campo de valor pretendido -->
+          <div class="fg">
+            <label for="f-valor">Valor pretendido</label>
+            <!-- inputmode="numeric" abre teclado numérico sem mudar o comportamento do campo -->
+            <input id="f-valor" type="text" name="valor" placeholder="Ex: R$ 300.000" inputmode="numeric">
+          </div>
+
+          <!-- Textarea de mensagem (campo opcional) -->
+          <div class="fg">
+            <label for="f-msg">
+              Mensagem
+              <span style="font-weight:400;text-transform:none;letter-spacing:0;">(opcional)</span>
+            </label>
+            <textarea id="f-msg" name="mensagem" placeholder="Conte um pouco mais sobre o que você procura…"></textarea>
+          </div>
+
+          <!-- Botão de envio: chama sendWhatsApp() no JS
+               type="button" evita comportamento padrão de submit de form -->
+          <button class="btn-primary btn-submit" type="button" onclick="sendWhatsApp()"
+                  aria-label="Enviar dados pelo WhatsApp">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
+              <path d="M12 0C5.373 0 0 5.373 0 12c0 2.025.507 3.933 1.395 5.608L0 24l6.545-1.376C8.18 23.516 10.05 24 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.85 0-3.612-.478-5.153-1.32l-.37-.219-3.821.802.835-3.706-.24-.381C2.493 15.546 2 13.83 2 12 2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/>
+            </svg>
+            Enviar pelo WhatsApp
+          </button>
+        </div>
+
+      </div><!-- /contato-grid -->
+    </section>
+
+  </main>
+
+
+  <!-- ══════════════════════════════════════════════════════════
+       RODAPÉ
+       role="contentinfo" é o landmark ARIA semântico para rodapé
+  ══════════════════════════════════════════════════════════ -->
+  <footer role="contentinfo">
+    <div class="footer-brand">
+      <!-- ── SLOT LOGO DA EMPRESA NO FOOTER ──
+           COMO USAR: substitua o <span> por:
+           <img class="footer-logo-slot" src="logo-white.png" alt="Imobiliária" height="28"> -->
+      <span class="footer-logo-slot" aria-label="Espaço para logo">Logo Empresa</span>
+      <div class="footer-div" aria-hidden="true"></div>
+      <span class="footer-name">Carlos Mendes</span>
+    </div>
+
+    <!-- Copyright — PERSONALIZE: atualize o ano conforme necessário -->
+    <p class="footer-copy">© 2025 · CRECI 12.345-F · Todos os direitos reservados</p>
+
+    <!-- Links para redes sociais -->
+    <div class="footer-social" aria-label="Redes sociais">
+      <!-- PERSONALIZE: substitua pelos perfis reais -->
+      <a href="https://instagram.com/carlosmendes.corretor" class="soc"
+         target="_blank" rel="noopener noreferrer" aria-label="Instagram de Carlos Mendes">ig</a>
+      <a href="https://wa.me/5583999999999" class="soc"
+         target="_blank" rel="noopener noreferrer" aria-label="WhatsApp de Carlos Mendes">wa</a>
+    </div>
+  </footer>
+
+  <!-- Scripts do portfólio -->
+  <script src="Scripts.js"></script>
+</body>
+</html>

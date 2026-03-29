@@ -1,0 +1,569 @@
+
+    /* ════════════════════════════════════════════════════════════
+       VARIÁVEIS CSS GLOBAIS (:root)
+       Paleta de cores, sombras e border-radius do site.
+       Para mudar uma cor, basta alterar aqui — reflete em todo o site.
+    ════════════════════════════════════════════════════════════ */
+    :root {
+      /* Tons de areia/bege — fundo principal e superfícies */
+      --sand:       #F7F3EE; /* fundo mais claro (background geral) */
+      --sand-mid:   #EDE7DC; /* fundo médio (seções alternadas) */
+      --sand-dark:  #D5CBBB; /* bordas, divisores e inputs */
+
+      /* Marrom — texto e elementos estruturais */
+      --brown:      #3E2C1E; /* marrom escuro (títulos, footer, botão hover) */
+      --brown-mid:  #6B5040; /* marrom médio (reservado para uso futuro) */
+
+      /* Dourado/terracota — cor de acento (botões, destaques, ícones) */
+      --accent:     #B07D4F; /* dourado principal */
+      --accent-lt:  #D4A574; /* dourado claro (hover, texto sobre fundos escuros) */
+
+      /* Utilitários */
+      --white:      #FFFFFF;
+      --text:       #2A1F16; /* cor principal de texto corrido */
+      --muted:      #8A7868; /* texto secundário, placeholders, descrições */
+      --border:     rgba(62,44,30,.11); /* borda sutil para cards e divisores */
+
+      /* Sombras padronizadas */
+      --shadow-sm:  0 2px 16px rgba(62,44,30,.08);  /* sombra leve (hover de cards) */
+      --shadow-md:  0 8px 40px rgba(62,44,30,.13);  /* sombra média (elementos flutuantes) */
+
+      /* Border-radius padronizados */
+      --r-sm:  8px;  /* pequeno — inputs, badges, botões menores */
+      --r-md: 14px;  /* médio — cards, modais, callouts */
+      --r-lg: 20px;  /* grande — frames de foto, cards de serviço */
+    }
+
+
+    /* ════════════════════════════════════════════════════════════
+       RESET E ESTILOS BASE
+       Remove margens/paddings padrão do navegador e define comportamentos globais
+    ════════════════════════════════════════════════════════════ */
+
+    /* box-sizing: border-box — padding e border não aumentam o tamanho total do elemento */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    /* scroll-behavior: smooth — rolagem suave ao clicar em âncoras (#sobre, #contato etc.)
+       overflow-x: hidden — impede scroll horizontal indesejado
+       font-size: 16px — base para cálculos rem */
+    html { scroll-behavior: smooth; font-size: 16px; overflow-x: hidden; }
+
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif; /* fonte principal do site */
+      background: var(--sand);  /* fundo bege claro */
+      color: var(--text);       /* texto marrom escuro */
+      -webkit-font-smoothing: antialiased; /* suaviza fontes no macOS/iOS */
+    }
+
+    /* Imagens nunca ultrapassam o container | height: auto evita distorção */
+    img { display: block; max-width: 100%; height: auto; }
+
+    /* Remove sublinhado e herda cor do pai em todos os links */
+    a { color: inherit; text-decoration: none; }
+
+    /* Remove bolinhas de listas não-ordenadas */
+    ul { list-style: none; }
+
+    /* Botões herdam a fonte do body (por padrão navegadores usam fonte do sistema) */
+    button { font-family: inherit; cursor: pointer; }
+
+
+    /* ════════════════════════════════════════════════════════════
+       SKIP LINK — ACESSIBILIDADE
+       Link invisível que aparece apenas ao navegar via teclado (Tab).
+       Permite pular direto para o conteúdo, ignorando a navegação.
+    ════════════════════════════════════════════════════════════ */
+    .skip-link {
+      position: absolute; top: -40px; left: 8px; /* escondido acima da tela */
+      background: var(--accent); color: var(--white);
+      padding: 8px 12px; border-radius: var(--r-sm);
+      font-size: .8rem; font-weight: 600; z-index: 9999;
+      transition: top .2s;
+    }
+    /* Quando recebe foco (Tab), desce para ficar visível */
+    .skip-link:focus { top: 8px; }
+
+
+    /* ════════════════════════════════════════════════════════════
+       NAVEGAÇÃO PRINCIPAL
+       Barra fixa no topo — fica visível enquanto o usuário rola a página
+    ════════════════════════════════════════════════════════════ */
+    nav {
+      position: fixed;          /* fixa no topo durante o scroll */
+      inset: 0 0 auto 0;        /* ocupa toda a largura, apenas no topo */
+      z-index: 100;             /* fica acima de todo o conteúdo da página */
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 52px;
+      height: 68px;
+      background: rgba(247,243,238,.94); /* bege semitransparente */
+      backdrop-filter: blur(14px);       /* desfoca o conteúdo atrás (efeito vidro fosco) */
+      -webkit-backdrop-filter: blur(14px); /* prefixo para Safari */
+      border-bottom: 1px solid var(--border);
+      gap: 24px;
+    }
+
+    /* Container da marca: agrupa logo da empresa + divisor + nome do corretor */
+    .nav-brand { display: flex; align-items: center; gap: 10px; flex-shrink: 0; min-width: 0; }
+
+    /* Wrapper do slot de logo da empresa
+       COMO USAR: substitua o <span> por <img src="logo.png" alt="Imobiliária"> */
+    .nav-logo-empresa { height: 34px; width: auto; display: flex; align-items: center; }
+
+    /* Placeholder visual enquanto não há logo real — borda tracejada estilo "cole aqui" */
+    .nav-logo-placeholder {
+      height: 34px; padding: 0 12px;
+      background: var(--sand-mid); border: 1.5px dashed var(--sand-dark);
+      border-radius: var(--r-sm);
+      font-size: .7rem; font-weight: 600; letter-spacing: .1em;
+      text-transform: uppercase; color: var(--muted);
+      display: flex; align-items: center; white-space: nowrap;
+    }
+
+    /* Linha vertical separadora entre logo da empresa e nome do corretor */
+    .nav-divider { width: 1px; height: 22px; background: var(--border); flex-shrink: 0; }
+
+    /* Nome do corretor exibido na nav */
+    .nav-nome {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.05rem; font-weight: 500; color: var(--brown); white-space: nowrap;
+    }
+
+    /* Links centrais da navegação (Sobre, Serviços, FAQ...)
+       flex: 1 ocupa o espaço disponível e justify-content: center os centraliza */
+    .nav-links { display: flex; align-items: center; gap: 32px; flex: 1; justify-content: center; }
+    .nav-links a {
+      font-size: .78rem; font-weight: 500; letter-spacing: .09em; text-transform: uppercase;
+      color: var(--muted); transition: color .2s;
+    }
+    .nav-links a:hover { color: var(--accent); }
+
+    /* Botão CTA "WhatsApp" no canto direito da nav */
+    .nav-cta {
+      flex-shrink: 0;
+      display: inline-flex; align-items: center; gap: 8px;
+      background: var(--accent); color: var(--white);
+      padding: 9px 20px; border-radius: 50px;
+      font-size: .78rem; font-weight: 600; letter-spacing: .05em;
+      text-transform: uppercase; border: none;
+      transition: background .25s, transform .2s; white-space: nowrap;
+    }
+    .nav-cta:hover { background: var(--brown); transform: translateY(-1px); }
+
+    /* Ícone hambúrguer (3 linhas) — visível apenas no mobile
+       display: none por padrão; muda para flex no breakpoint 960px */
+    .hamburger { display: none; flex-direction: column; gap: 5px; background: none; border: none; padding: 6px; flex-shrink: 0; }
+    .hamburger span { display: block; width: 22px; height: 1.5px; background: var(--text); border-radius: 2px; transition: all .3s; }
+
+
+    /* ════════════════════════════════════════════════════════════
+       HERO — SEÇÃO PRINCIPAL (PRIMEIRA DOBRA)
+       Layout assimétrico: conteúdo à esquerda (55%) + foto à direita (45%)
+    ════════════════════════════════════════════════════════════ */
+    #hero {
+      min-height: 100vh;               /* ocupa 100% da altura da tela */
+      display: grid;
+      grid-template-columns: 55% 45%; /* coluna de conteúdo maior */
+      padding-top: 68px;              /* compensa a altura da nav fixa */
+      background: var(--white);
+    }
+
+    /* Lado esquerdo: conteúdo textual centralizado verticalmente */
+    .hero-left { display: flex; flex-direction: column; justify-content: center; padding: 72px 56px 72px 64px; }
+
+    /* Tag de credencial acima do título (ex: "CORRETOR IMOBILIÁRIO · CRECI 12.345-F") */
+    .hero-eyebrow {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-size: .68rem; font-weight: 600; letter-spacing: .22em; text-transform: uppercase;
+      color: var(--accent); margin-bottom: 28px;
+    }
+    /* Linha decorativa antes do eyebrow usando pseudo-elemento ::before */
+    .hero-eyebrow::before { content: ''; display: block; width: 28px; height: 1.5px; background: var(--accent); }
+
+    /* Título H1 — único na página, essencial para SEO
+       clamp() adapta o tamanho: mín 2.6rem, ideal 4vw, máx 4.4rem */
+    h1.hero-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.6rem, 4vw, 4.4rem);
+      font-weight: 500; line-height: 1.1; color: var(--brown); margin-bottom: 22px;
+    }
+    /* <em> dentro do H1 fica em itálico dourado para destacar uma palavra-chave */
+    h1.hero-title em { font-style: italic; color: var(--accent); }
+
+    /* Parágrafo descritivo abaixo do título */
+    .hero-desc { font-size: .97rem; line-height: 1.82; color: var(--muted); max-width: 480px; margin-bottom: 40px; }
+
+    /* Container dos dois botões de ação */
+    .hero-ctas { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 48px; }
+
+    /* Botão primário dourado — usado em múltiplos lugares no site */
+    .btn-primary {
+      display: inline-flex; align-items: center; gap: 9px;
+      background: var(--accent); color: var(--white);
+      padding: 13px 26px; border-radius: 50px;
+      font-size: .83rem; font-weight: 600; letter-spacing: .04em;
+      border: none; transition: background .25s, transform .2s;
+    }
+    .btn-primary:hover { background: var(--brown); transform: translateY(-2px); }
+    .btn-primary svg { flex-shrink: 0; } /* ícone SVG não encolhe com o flex */
+
+    /* Botão fantasma (contorno) — alternativa secundária ao botão primário */
+    .btn-ghost {
+      display: inline-flex; align-items: center; gap: 9px;
+      background: transparent; color: var(--brown);
+      padding: 13px 26px; border-radius: 50px;
+      font-size: .83rem; font-weight: 500; letter-spacing: .04em;
+      border: 1.5px solid var(--sand-dark);
+      transition: border-color .25s, color .25s, transform .2s;
+    }
+    .btn-ghost:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-2px); }
+
+    /* Bloco de estatísticas com linha divisória acima */
+    .hero-stats { display: flex; gap: 32px; padding-top: 40px; border-top: 1px solid var(--border); }
+    .stat-num { font-family: 'Playfair Display', serif; font-size: 2rem; font-weight: 700; color: var(--brown); line-height: 1; }
+    .stat-lbl { font-size: .7rem; font-weight: 500; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); margin-top: 5px; }
+
+    /* Lado direito do hero: área da foto */
+    .hero-right { position: relative; overflow: hidden; background: var(--sand); }
+
+    /* Triângulo decorativo no canto inferior direito usando clip-path */
+    .hero-right::before {
+      content: ''; position: absolute; bottom: 0; right: 0;
+      width: 60%; height: 60%; background: var(--sand-mid);
+      clip-path: polygon(100% 0, 100% 100%, 0 100%); /* triângulo apontando para cima-esquerda */
+    }
+
+    /* Círculo decorativo no canto superior direito */
+    .hero-right::after {
+      content: ''; position: absolute; top: 24px; right: 24px;
+      width: 80px; height: 80px;
+      border: 2px solid rgba(176,125,79,.25); border-radius: 50%;
+    }
+
+    /* Wrapper da foto: alinha o PNG na base do container */
+    .hero-photo-wrap { position: relative; z-index: 2; height: 100%; display: flex; align-items: flex-end; justify-content: center; }
+
+    /* ── FOTO 2 — PNG do corretor (apontando ou braços cruzados) ──
+       Fundo transparente integra o corretor como elemento visual do site.
+       PERSONALIZE: substitua src pelo arquivo real.
+       Tamanho recomendado: 600×900px PNG com canal alpha (fundo transparente).
+       loading="eager" + fetchpriority="high" = carrega com prioridade máxima (LCP) */
+    .foto-hero {
+      width: 88%; max-width: 440px;
+      object-fit: contain; object-position: bottom center;
+      filter: drop-shadow(0 24px 48px rgba(62,44,30,.20)); /* sombra integra PNG no cenário */
+      aspect-ratio: 2/3;   /* reserva espaço proporcional antes da imagem carregar (evita CLS) */
+      background: linear-gradient(160deg, var(--sand-mid) 0%, var(--sand-dark) 100%); /* placeholder */
+      border-radius: var(--r-md) var(--r-md) 0 0; /* arredondado só no topo */
+    }
+
+    /* Badge flutuante com CRECI — sobreposto à foto no canto inferior esquerdo */
+    .badge-creci { position: absolute; bottom: 28px; left: 20px; z-index: 3; background: var(--white); border-radius: var(--r-sm); padding: 10px 16px; box-shadow: var(--shadow-md); display: flex; align-items: center; gap: 10px; }
+    .badge-dot   { width: 8px; height: 8px; border-radius: 50%; background: #4caf50; flex-shrink: 0; } /* bolinha verde = CRECI ativo */
+    .badge-label { font-size: .72rem; font-weight: 600; color: var(--brown); line-height: 1.3; }
+    .badge-sub   { font-size: .65rem; color: var(--muted); margin-top: 1px; }
+
+
+    /* ════════════════════════════════════════════════════════════
+       BANNER FULL-WIDTH — FOTO 1
+       Imagem panorâmica que vai de ponta a ponta após o hero.
+       Serve como "imagem geral do site" (escritório, imóvel, fachada).
+       PERSONALIZE: substitua src pelo arquivo real (1600×480px JPG recomendado).
+    ════════════════════════════════════════════════════════════ */
+    #banner-full {
+      width: 100%; height: 480px;
+      position: relative; overflow: hidden; /* imagem não vaza para fora */
+      background: var(--sand-mid); /* cor enquanto a imagem carrega */
+    }
+
+    /* Imagem cobre o container com corte proporcional */
+    .banner-img {
+      width: 100%; height: 100%;
+      object-fit: cover;            /* cobre sem distorcer */
+      object-position: center 35%; /* centraliza levemente acima do meio */
+      display: block;
+      filter: saturate(.88) brightness(.97); /* leve dessaturação para tom mais elegante */
+    }
+
+    /* Overlay gradiente (esquerda escura → direita transparente) para criar contraste com o texto */
+    .banner-overlay {
+      position: absolute; inset: 0; /* ocupa todo o banner */
+      background: linear-gradient(to right, rgba(62,44,30,.68) 0%, rgba(62,44,30,.15) 55%, transparent 100%);
+      display: flex; flex-direction: column; justify-content: center;
+      padding: 0 80px;
+    }
+    .banner-tag  { font-size: .68rem; font-weight: 600; letter-spacing: .22em; text-transform: uppercase; color: var(--accent-lt); margin-bottom: 14px; }
+    .banner-quote { font-family: 'Playfair Display', serif; font-size: clamp(1.5rem, 3vw, 2.4rem); font-style: italic; color: var(--white); line-height: 1.3; max-width: 540px; }
+
+    /* Placeholder visual mostrado pelo onerror quando a imagem não carrega */
+    .banner-placeholder { width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; flex-direction: column; gap: 12px; background: linear-gradient(135deg, var(--sand-mid) 0%, var(--sand-dark) 100%); }
+    .banner-placeholder svg  { opacity: .25; }
+    .banner-placeholder span { font-size: .75rem; color: var(--muted); letter-spacing: .15em; text-transform: uppercase; }
+
+    /* Responsividade do banner no mobile */
+    @media (max-width: 960px) { #banner-full { height: 300px; } .banner-overlay { padding: 0 28px; } }
+
+
+    /* ════════════════════════════════════════════════════════════
+       SEÇÃO SOBRE MIM
+       Grid de 2 colunas: texto à esquerda + foto à direita
+    ════════════════════════════════════════════════════════════ */
+    #sobre { background: var(--sand); padding: 96px 64px; display: grid; grid-template-columns: 1fr 1fr; gap: 72px; align-items: center; }
+
+    /* Tag pequena acima dos títulos de seção (ex: "QUEM SOU EU") */
+    .section-eyebrow { font-size: .68rem; font-weight: 600; letter-spacing: .22em; text-transform: uppercase; color: var(--accent); display: block; margin-bottom: 14px; }
+
+    /* Título de seção H2 — padrão reutilizado em todo o site */
+    .section-title { font-family: 'Playfair Display', serif; font-size: clamp(1.9rem, 2.8vw, 2.8rem); font-weight: 500; line-height: 1.2; color: var(--brown); margin-bottom: 20px; }
+    .section-title em { font-style: italic; color: var(--accent); } /* palavra em destaque dourado */
+
+    /* Barra decorativa dourada abaixo dos títulos */
+    .accent-bar { width: 44px; height: 2px; background: var(--accent); opacity: .55; margin-bottom: 32px; }
+
+    /* Parágrafos do texto biográfico */
+    .sobre-text p { font-size: .95rem; line-height: 1.86; color: var(--muted); margin-bottom: 16px; }
+
+    /* Lista de credenciais (CRECI, negociações, financiamento) */
+    .creds { display: flex; flex-direction: column; gap: 10px; margin-top: 28px; }
+    .cred-row { display: flex; align-items: center; gap: 14px; padding: 12px 16px; border-radius: var(--r-sm); background: var(--white); border: 1px solid var(--border); transition: border-color .25s; }
+    .cred-row:hover { border-color: var(--accent-lt); }
+    .cred-ic   { width: 34px; height: 34px; border-radius: 8px; flex-shrink: 0; background: rgba(176,125,79,.1); display: flex; align-items: center; justify-content: center; font-size: .95rem; }
+    .cred-name { font-size: .84rem; font-weight: 600; color: var(--brown); }
+    .cred-desc { font-size: .72rem; color: var(--muted); margin-top: 1px; }
+
+    /* Container da foto na seção Sobre
+       padding-bottom reserva espaço para o card "10 anos" que posiciona fora do frame */
+    .sobre-visual { position: relative; padding-bottom: 24px; }
+
+    /* ── FOTO 3 — PNG do corretor de braços cruzados ou apontando ──
+       Fundo transparente integra o corretor na composição do frame decorativo.
+       PERSONALIZE: substitua src pelo arquivo real.
+       Tamanho recomendado: 600×750px PNG com canal alpha. */
+    .sobre-photo-frame {
+      position: relative; border-radius: var(--r-lg);
+      background: linear-gradient(145deg, var(--sand-mid) 0%, var(--sand-dark) 100%); /* fundo do frame */
+      aspect-ratio: 4/5;
+      overflow: visible;                         /* permite card "10 anos" vazar para fora */
+      outline: 2px solid rgba(176,125,79,.25);   /* borda dourada ao redor do frame */
+      outline-offset: 10px;                      /* espaço entre a borda e o frame */
+    }
+    .foto-sobre {
+      width: 100%; height: 100%;
+      object-fit: contain; object-position: bottom center;
+      border-radius: var(--r-lg);
+      filter: drop-shadow(0 16px 32px rgba(62,44,30,.18)); /* sombra para PNG transparente */
+      position: relative; z-index: 1;
+    }
+
+    /* Card dourado flutuante sobreposto à foto com "10 anos de experiência" */
+    .exp-card { position: absolute; bottom: -18px; right: -18px; z-index: 2; background: var(--accent); color: var(--white); padding: 18px 22px; border-radius: var(--r-md); box-shadow: var(--shadow-md); text-align: center; }
+    .exp-num  { font-family: 'Playfair Display', serif; font-size: 2.2rem; font-weight: 700; line-height: 1; }
+    .exp-lbl  { font-size: .65rem; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; opacity: .85; margin-top: 3px; }
+
+
+    /* ════════════════════════════════════════════════════════════
+       SEÇÃO SERVIÇOS
+       Grid de 3 cards: Compra & Venda, Financiamento, Locação
+    ════════════════════════════════════════════════════════════ */
+    #servicos { background: var(--white); padding: 96px 64px; }
+    .section-header { text-align: center; margin-bottom: 56px; }
+    .section-header .accent-bar { margin: 0 auto; } /* centraliza a barra decorativa */
+
+    /* Grade de 3 colunas iguais */
+    .services-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+
+    /* Card individual de serviço */
+    .service-card { padding: 32px 26px; border-radius: var(--r-lg); background: var(--sand); border: 1px solid var(--border); transition: transform .3s, box-shadow .3s, border-color .3s; }
+    .service-card:hover { transform: translateY(-5px); box-shadow: var(--shadow-md); border-color: var(--accent-lt); } /* efeito de elevação no hover */
+
+    .svc-icon { width: 50px; height: 50px; border-radius: 12px; background: rgba(176,125,79,.1); display: flex; align-items: center; justify-content: center; font-size: 1.4rem; margin-bottom: 20px; }
+    .svc-name { font-family: 'Playfair Display', serif; font-size: 1.2rem; font-weight: 500; color: var(--brown); margin-bottom: 10px; }
+    .svc-desc { font-size: .82rem; line-height: 1.78; color: var(--muted); }
+    .svc-link { display: inline-block; margin-top: 16px; font-size: .76rem; font-weight: 600; color: var(--accent); letter-spacing: .04em; transition: color .2s; }
+    .svc-link:hover { color: var(--brown); }
+
+
+    /* ════════════════════════════════════════════════════════════
+       SEÇÃO FAQ — PERGUNTAS FREQUENTES
+       Accordion: clica na pergunta para expandir/recolher a resposta
+    ════════════════════════════════════════════════════════════ */
+    #faq { background: var(--sand); padding: 96px 64px; }
+    .faq-inner { max-width: 800px; margin: 0 auto; } /* limita largura e centraliza */
+    .faq-list  { display: flex; flex-direction: column; gap: 10px; }
+
+    /* Container de cada par pergunta+resposta */
+    .faq-item { background: var(--white); border-radius: var(--r-md); border: 1px solid var(--border); overflow: hidden; transition: border-color .25s; }
+    .faq-item:hover { border-color: var(--accent-lt); }
+
+    /* Botão da pergunta — width:100% e background:none corrigem tamanhos inconsistentes entre itens */
+    .faq-q { width: 100%; background: none; border: none; padding: 18px 22px; cursor: pointer; text-align: left; display: flex; justify-content: space-between; align-items: center; gap: 14px; font-size: .9rem; font-weight: 600; color: var(--brown); user-select: none; line-height: 1.4; }
+
+    /* Ícone "+" que rotaciona para "×" quando aberto */
+    .faq-icon { width: 26px; height: 26px; border-radius: 50%; flex-shrink: 0; background: rgba(176,125,79,.1); color: var(--accent); display: flex; align-items: center; justify-content: center; font-size: 1.05rem; line-height: 1; transition: background .25s, transform .3s; }
+    .faq-item.open .faq-icon { background: var(--accent); color: var(--white); transform: rotate(45deg); } /* quando aberto: dourado e rotaciona */
+
+    /* Resposta: começa colapsada (max-height:0) e expande com transição CSS quando .open */
+    .faq-a { max-height: 0; overflow: hidden; font-size: .84rem; line-height: 1.78; color: var(--muted); transition: max-height .35s ease, padding .3s ease; padding: 0 22px; }
+    .faq-item.open .faq-a { max-height: 240px; padding: 0 22px 18px; } /* expande quando aberto */
+
+
+    /* ════════════════════════════════════════════════════════════
+       SEÇÃO FEEDBACKS / DEPOIMENTOS
+       Grid de 3 cards com avaliações de clientes
+    ════════════════════════════════════════════════════════════ */
+    #feedbacks { background: var(--white); padding: 96px 64px; }
+    .testimonials { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+
+    .t-card   { padding: 28px 24px; border-radius: var(--r-lg); background: var(--sand); border: 1px solid var(--border); transition: box-shadow .3s, border-color .3s; }
+    .t-card:hover { box-shadow: var(--shadow-sm); border-color: var(--accent-lt); }
+    .t-stars  { color: var(--accent); font-size: .8rem; letter-spacing: 2px; margin-bottom: 14px; } /* estrelas ★★★★★ */
+    .t-text   { font-size: .84rem; line-height: 1.8; color: var(--muted); font-style: italic; margin-bottom: 20px; }
+    .t-author { display: flex; align-items: center; gap: 11px; padding-top: 14px; border-top: 1px solid var(--border); }
+    .t-avatar { width: 38px; height: 38px; border-radius: 50%; flex-shrink: 0; background: var(--accent); color: var(--white); display: flex; align-items: center; justify-content: center; font-family: 'Playfair Display', serif; font-size: .95rem; font-weight: 700; } /* círculo com inicial do nome */
+    .t-name   { font-size: .82rem; font-weight: 600; color: var(--brown); }
+    .t-loc    { font-size: .68rem; color: var(--muted); margin-top: 1px; }
+
+
+    /* ════════════════════════════════════════════════════════════
+       SEÇÃO CONTATO
+       Grid de 2 colunas: info/canais à esquerda + formulário à direita
+    ════════════════════════════════════════════════════════════ */
+    #contato { background: var(--sand); padding: 96px 64px; }
+
+    /* isolation: isolate cria um contexto de empilhamento isolado,
+       prevenindo que elementos internos "vazem" visualmente (fix de z-index) */
+    .contato-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 72px; isolation: isolate; }
+
+    /* Parágrafos da coluna de info */
+    .contact-info p { font-size: .93rem; line-height: 1.82; color: var(--muted); margin-bottom: 32px; }
+
+    /* Card escuro com citação do corretor */
+    .contact-callout { background: var(--brown); border-radius: var(--r-lg); padding: 32px 28px; margin-bottom: 28px; }
+    .contact-callout-quote { font-family: 'Playfair Display', serif; font-size: 1.15rem; font-style: italic; color: var(--accent-lt); line-height: 1.5; margin-bottom: 10px; }
+    .contact-callout-name  { font-size: .72rem; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; color: rgba(247,243,238,.45); }
+
+    /* Lista de canais de contato em coluna */
+    .channels { display: flex; flex-direction: column; gap: 10px; }
+
+    /* Cada canal: link clicável com ícone + label + valor */
+    .ch-item { display: flex; align-items: center; gap: 13px; padding: 13px 16px; border-radius: var(--r-sm); background: var(--white); border: 1px solid var(--border); transition: border-color .25s, box-shadow .25s; }
+    .ch-item:hover { border-color: var(--accent-lt); box-shadow: var(--shadow-sm); }
+    .ch-ic  { width: 38px; height: 38px; border-radius: 9px; flex-shrink: 0; background: rgba(176,125,79,.1); display: flex; align-items: center; justify-content: center; font-size: 1rem; }
+    .ch-lbl { font-size: .65rem; font-weight: 600; text-transform: uppercase; letter-spacing: .1em; color: var(--muted); margin-bottom: 1px; }
+    .ch-val { font-size: .86rem; font-weight: 600; color: var(--brown); }
+
+    /* Formulário de contato */
+    .form { display: flex; flex-direction: column; gap: 14px; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; } /* linha com 2 campos lado a lado */
+    .fg { display: flex; flex-direction: column; gap: 6px; } /* grupo label + input */
+    .fg label { font-size: .67rem; font-weight: 600; text-transform: uppercase; letter-spacing: .12em; color: var(--muted); }
+
+    /* Estilo compartilhado de inputs, selects e textareas */
+    .fg input, .fg select, .fg textarea {
+      background: var(--white); border: 1.5px solid var(--sand-dark);
+      color: var(--text); padding: 12px 14px; border-radius: var(--r-sm);
+      font-family: 'Plus Jakarta Sans', sans-serif; font-size: .86rem;
+      outline: none; transition: border-color .25s;
+      -webkit-appearance: none; /* remove estilo padrão do iOS */
+    }
+    .fg input::placeholder, .fg textarea::placeholder { color: var(--muted); opacity: .55; }
+    .fg input:focus, .fg select:focus, .fg textarea:focus { border-color: var(--accent); } /* borda dourada no foco */
+    .fg select option { background: var(--white); }
+    .fg textarea { resize: vertical; min-height: 100px; } /* só redimensiona verticalmente */
+
+    /* Botão de envio: full-width */
+    .btn-submit { width: 100%; justify-content: center; padding: 14px; font-size: .86rem; border-radius: var(--r-sm); margin-top: 2px; }
+
+
+    /* ════════════════════════════════════════════════════════════
+       FOOTER
+    ════════════════════════════════════════════════════════════ */
+    footer { background: var(--brown); padding: 36px 64px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 20px; }
+    .footer-brand { display: flex; align-items: center; gap: 10px; }
+
+    /* Slot de logo no footer — mesmo conceito da nav
+       COMO USAR: <img class="footer-logo-slot" src="logo-white.png" alt="Empresa" height="28"> */
+    .footer-logo-slot { height: 28px; padding: 0 10px; background: rgba(247,243,238,.12); border: 1px dashed rgba(247,243,238,.25); border-radius: 6px; font-size: .62rem; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; color: rgba(247,243,238,.45); display: flex; align-items: center; white-space: nowrap; }
+    .footer-div  { width: 1px; height: 18px; background: rgba(247,243,238,.2); } /* divisor vertical */
+    .footer-name { font-family: 'Playfair Display', serif; font-size: 1.05rem; color: var(--accent-lt); letter-spacing: .05em; }
+    .footer-copy { font-size: .71rem; color: rgba(247,243,238,.4); } /* texto de copyright */
+    .footer-social { display: flex; gap: 10px; } /* ícones sociais */
+    .soc { width: 34px; height: 34px; border-radius: 50%; border: 1px solid rgba(247,243,238,.18); display: flex; align-items: center; justify-content: center; font-size: .72rem; font-weight: 700; color: rgba(247,243,238,.5); transition: border-color .25s, color .25s; }
+    .soc:hover { border-color: var(--accent-lt); color: var(--accent-lt); }
+
+
+    /* ════════════════════════════════════════════════════════════
+       MENU MOBILE (OVERLAY)
+       Cobre a tela inteira com os links quando o hambúrguer é clicado.
+       Controlado pelo JS: toggleMenu() adiciona/remove a classe .open
+    ════════════════════════════════════════════════════════════ */
+    .mob-menu { display: none; position: fixed; inset: 0; z-index: 200; background: var(--white); flex-direction: column; align-items: center; justify-content: center; gap: 28px; }
+    .mob-menu.open { display: flex; } /* JS adiciona .open para exibir o menu */
+    .mob-menu a    { font-family: 'Playfair Display', serif; font-size: 1.9rem; font-weight: 500; color: var(--brown); transition: color .2s; }
+    .mob-menu a:hover { color: var(--accent); }
+    .mob-close { position: absolute; top: 20px; right: 22px; background: none; border: none; font-size: 1.7rem; color: var(--text); line-height: 1; } /* botão × */
+    .mob-cta   { margin-top: 12px; } /* margem extra no CTA do menu mobile */
+
+
+    /* ════════════════════════════════════════════════════════════
+       ANIMAÇÕES
+       .fade-in mantida como no-op (opacity: 1) pois animações com
+       transform causavam bugs de stacking context no mobile,
+       fazendo elementos sobreporem outros durante a animação.
+    ════════════════════════════════════════════════════════════ */
+    .fade-in { opacity: 1; }
+
+
+    /* ════════════════════════════════════════════════════════════
+       RESPONSIVIDADE — BREAKPOINT 960px (tablet e mobile)
+       Todos os grids de 2+ colunas viram coluna única
+    ════════════════════════════════════════════════════════════ */
+    @media (max-width: 960px) {
+      /* Nav: esconde links e CTA, exibe hambúrguer */
+      nav { padding: 0 20px; }
+      .nav-links, .nav-cta { display: none; }
+      .hamburger { display: flex; }
+
+      /* Hero: empilha foto acima do conteúdo */
+      #hero { grid-template-columns: 1fr; min-height: auto; }
+      .hero-left { padding: 52px 24px 40px; text-align: center; }
+      .hero-desc  { margin: 0 auto 32px; }
+      .hero-ctas  { justify-content: center; }
+      .hero-stats { justify-content: center; }
+      .hero-right { min-height: 300px; }
+      .foto-hero  { width: 70%; max-width: 280px; }
+      .badge-creci { left: 12px; bottom: 14px; }
+
+      /* Sobre: foto sobe para antes do texto */
+      #sobre { grid-template-columns: 1fr; gap: 40px; padding: 72px 24px; }
+      .sobre-visual { order: -1; } /* muda a ordem visual da foto para antes do texto */
+      .exp-card { right: 8px; bottom: -14px; }
+
+      /* Serviços: 1 card por linha */
+      #servicos { padding: 72px 24px; }
+      .services-grid { grid-template-columns: 1fr; gap: 14px; }
+
+      /* FAQ e Feedbacks: padding reduzido */
+      #faq { padding: 72px 24px; }
+      #feedbacks { padding: 72px 24px; }
+      .testimonials { grid-template-columns: 1fr; gap: 14px; }
+
+      /* Contato: coluna única */
+      #contato { padding: 72px 24px; }
+      .contato-grid { grid-template-columns: 1fr; gap: 40px; }
+      .form-row { grid-template-columns: 1fr; } /* campos nome e telefone empilham */
+
+      /* Footer centralizado em coluna */
+      footer { flex-direction: column; align-items: center; text-align: center; padding: 32px 24px; }
+    }
+
+    /* Breakpoint extra para telas muito pequenas (< 480px) */
+    @media (max-width: 480px) {
+      .hero-stats { flex-wrap: wrap; gap: 24px; } /* stats quebram em 2 linhas */
+      h1.hero-title { font-size: 2.2rem; }
+    }
+
+    /* Estilos para impressão (Ctrl+P): esconde navegação */
+    @media print {
+      nav, .hamburger, .mob-menu, .nav-cta { display: none; }
+      .fade-in { opacity: 1; transform: none; }
+    }
