@@ -100,7 +100,7 @@
       const textoFinal = linhas.join('\n');
 
       /* Número do corretor — PERSONALIZE: substitua pelo número real (DDI+DDD+número sem espaços) */
-      const numeroWhatsApp = '5583999999999';
+      const numeroWhatsApp = '5583991603629';
 
       /* encodeURIComponent converte caracteres especiais para formato URL seguro
          Ex: "ã" vira "%C3%A3", "\n" vira "%0A" */
