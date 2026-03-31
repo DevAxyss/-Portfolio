@@ -5,7 +5,81 @@
   ══════════════════════════════════════════════════════════ -->
 
 
-     ──────────────────────────────────────────────────────
+    /* ══════════════════════════════════════════════════════════
+       CONFIGURAÇÕES DO CORRETOR
+       Altere apenas este bloco para personalizar o portfólio.
+       Todas as informações dinâmicas são geradas a partir daqui.
+       ATENÇÃO: não exponha senhas, tokens ou chaves de API aqui.
+    ══════════════════════════════════════════════════════════ */
+    const CORRETOR = {
+      nome:         'Victor Araújo',
+      creci:        '1816-J',
+      whatsapp:     '5583991603629',       /* DDI+DDD+número, sem espaços ou traços */
+      telMask:      '(83) 9 9160-3629',    /* formato de exibição no site             */
+      instagram:    '@victor_barbosaa_',
+      instagramUrl: 'https://instagram.com/victor_barbosaa_',
+      email:        'victorconsolprime@gmail.com',
+    };
+
+
+    /* ──────────────────────────────────────────────────────
+       INJEÇÃO DE DADOS — applyConfig()
+       Aplica as variáveis do CORRETOR nos elementos do DOM.
+       Evita que informações sensíveis fiquem espalhadas
+       pelo HTML e centraliza a manutenção em um único lugar.
+    ────────────────────────────────────────────────────── */
+    function applyConfig() {
+
+      /* ── Nomes e CRECI visíveis na página ── */
+      var mapa = {
+        'display-nome':         CORRETOR.nome,
+        'display-eyebrow':      'Corretor Imobiliário · CRECI ' + CORRETOR.creci,
+        'display-badge-nome':   CORRETOR.nome,
+        'display-badge-creci':  'CRECI ' + CORRETOR.creci + ' · Ativo',
+        'display-cred-creci':   'CRECI ' + CORRETOR.creci + ' — Ativo',
+        'display-callout-nome': '— ' + CORRETOR.nome + ' · Corretor CRECI ' + CORRETOR.creci,
+        'display-footer-nome':  CORRETOR.nome,
+        'display-footer-creci': '© 2025 · CRECI ' + CORRETOR.creci + ' · Todos os direitos reservados',
+        'display-tel':          CORRETOR.telMask,
+        'display-ig':           CORRETOR.instagram,
+        'display-email':        CORRETOR.email,
+      };
+      Object.keys(mapa).forEach(function(id) {
+        var el = document.getElementById(id);
+        if (el) el.textContent = mapa[id];
+      });
+
+      /* ── Links de contato ── */
+      var linkIg = document.getElementById('link-instagram');
+      if (linkIg) linkIg.setAttribute('href', CORRETOR.instagramUrl);
+
+      var linkEmail = document.getElementById('link-email');
+      if (linkEmail) linkEmail.setAttribute('href', 'mailto:' + CORRETOR.email);
+
+      /* ── Todos os links WhatsApp — mantém o parâmetro ?text= intacto ── */
+      document.querySelectorAll('a[href*="wa.me/"]').forEach(function(el) {
+        var href = el.getAttribute('href');
+        var baseUrl = 'https://wa.me/' + CORRETOR.whatsapp;
+        el.setAttribute('href', href.indexOf('?text=') !== -1
+          ? baseUrl + '?text=' + href.split('?text=')[1]
+          : baseUrl);
+      });
+
+      /* ── Links Instagram no rodapé e demais ── */
+      document.querySelectorAll('a[href*="instagram.com/"]').forEach(function(el) {
+        if (el.id !== 'link-instagram') {
+          el.setAttribute('href', CORRETOR.instagramUrl);
+        }
+      });
+
+      /* ── Título da aba do navegador ── */
+      document.title = CORRETOR.nome + ' | Corretor Imobiliário · CRECI ' + CORRETOR.creci;
+    }
+
+    document.addEventListener('DOMContentLoaded', applyConfig);
+
+
+    /* ──────────────────────────────────────────────────────
        MENU MOBILE — toggleMenu()
        Abre/fecha o overlay de navegação mobile.
        Não trava o scroll do body (document.body.style.overflow = '' sempre).
@@ -71,42 +145,52 @@
        Resultado: o lead chega qualificado com nome, interesse, valor e telefone.
        Não usa backend nem banco de dados — tudo via link wa.me (ideal para o MVP).
     ────────────────────────────────────────────────────── */
+    /* Remove tags HTML e caracteres de controle dos inputs do formulário.
+       Evita injeção de conteúdo malicioso na URL gerada para o WhatsApp. */
+    function sanitize(str) {
+      return str
+        .replace(/<[^>]*>/g, '')          /* remove qualquer tag HTML */
+        .replace(/[^\w\s@.,;:()\-+]/gu, '')  /* mantém apenas chars seguros */
+        .trim();
+    }
+
     function sendWhatsApp() {
-      /* Coleta os valores dos campos e remove espaços extras com trim() */
-      const nome      = document.getElementById('f-nome').value.trim();
-      const telefone  = document.getElementById('f-tel').value.trim();
-      const interesse = document.getElementById('f-interesse').value;
-      const valor     = document.getElementById('f-valor').value.trim();
-      const mensagem  = document.getElementById('f-msg').value.trim();
+      /* Verifica consentimento LGPD antes de processar qualquer dado */
+      var lgpdCheck = document.getElementById('f-lgpd');
+      if (lgpdCheck && !lgpdCheck.checked) {
+        alert('Para enviar, aceite o uso dos seus dados conforme a LGPD.');
+        lgpdCheck.focus();
+        return;
+      }
+
+      /* Coleta e sanitiza os valores dos campos */
+      var nome      = sanitize(document.getElementById('f-nome').value);
+      var telefone  = sanitize(document.getElementById('f-tel').value);
+      var interesse = document.getElementById('f-interesse').value;
+      var valor     = sanitize(document.getElementById('f-valor').value);
+      var mensagem  = sanitize(document.getElementById('f-msg').value);
 
       /* Validação: campos obrigatórios não podem estar vazios */
       if (!nome || !telefone || !interesse) {
         alert('Por favor, preencha seu nome, telefone e interesse.');
-        return; /* interrompe a função */
+        return;
       }
 
-      /* Monta o array de linhas da mensagem
-         * (asterisco) ao redor do texto deixa em negrito no WhatsApp
-         filter(Boolean) remove as linhas vazias (campos opcionais não preenchidos) */
-      const linhas = [
-        `Olá, me chamo *${nome}*.`,
-        `Tenho interesse em: *${interesse}*.`,
-        valor    ? `Valor pretendido: *${valor}*.` : '',  /* só adiciona se preenchido */
-        telefone ? `Telefone: *${telefone}*.`       : '',
-        mensagem ? `Observação: ${mensagem}`         : ''
+      /* Monta o array de linhas — asteriscos deixam em negrito no WhatsApp */
+      var linhas = [
+        'Ola, me chamo *' + nome + '*.',
+        'Tenho interesse em: *' + interesse + '*.',
+        valor    ? 'Valor pretendido: *' + valor + '*.'  : '',
+        telefone ? 'Telefone: *' + telefone + '*.'       : '',
+        mensagem ? 'Observacao: ' + mensagem             : ''
       ].filter(Boolean);
 
-      /* Junta as linhas com quebra de linha (\n) */
-      const textoFinal = linhas.join('\n');
+      var textoFinal = linhas.join('\n');
 
-      /* Número do corretor — PERSONALIZE: substitua pelo número real (DDI+DDD+número sem espaços) */
-      const numeroWhatsApp = '5583991603629';
+      /* Usa o número centralizado do objeto CORRETOR */
+      var urlWhatsApp = 'https://wa.me/' + CORRETOR.whatsapp + '?text=' + encodeURIComponent(textoFinal);
 
-      /* encodeURIComponent converte caracteres especiais para formato URL seguro
-         Ex: "ã" vira "%C3%A3", "\n" vira "%0A" */
-      const urlWhatsApp = `https://wa.me/${numeroWhatsApp}?text=${encodeURIComponent(textoFinal)}`;
-
-      /* Abre o WhatsApp em uma nova aba com segurança (noopener previne acesso ao window.opener) */
+      /* Abre o WhatsApp em nova aba com segurança */
       window.open(urlWhatsApp, '_blank', 'noopener,noreferrer');
     }
 
@@ -132,3 +216,23 @@
         observer.observe(elemento);
       });
     }
+
+
+    /* ──────────────────────────────────────────────────────
+       BANNER LGPD — initLGPD() / aceitarLGPD()
+       Exibe o aviso de privacidade na primeira visita.
+       Consent salvo em localStorage — não reaparece após aceite.
+    ────────────────────────────────────────────────────── */
+    function initLGPD() {
+      if (localStorage.getItem('lgpd_aceito')) return; /* já aceitou antes */
+      var banner = document.getElementById('lgpd-banner');
+      if (banner) banner.removeAttribute('hidden');
+    }
+
+    function aceitarLGPD() {
+      localStorage.setItem('lgpd_aceito', '1');
+      var banner = document.getElementById('lgpd-banner');
+      if (banner) banner.setAttribute('hidden', '');
+    }
+
+    document.addEventListener('DOMContentLoaded', initLGPD);

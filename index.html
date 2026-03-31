@@ -40,6 +40,9 @@
   <!-- max-snippet, max-image-preview e max-video-preview permitem previews ricos no Google -->
   <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
 
+  <!-- Segurança: controla quais informações são enviadas no cabeçalho Referer -->
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+
   <!-- Cor da barra de endereço no Chrome Mobile (Android) -->
   <meta name="theme-color" content="#F7F3EE">
 
@@ -205,7 +208,7 @@
       <div class="nav-divider" aria-hidden="true"></div>
 
       <!-- Nome do corretor na nav -->
-      <span class="nav-nome">Victor Araújo</span>
+      <span class="nav-nome" id="display-nome"></span>
     </div>
 
     <!-- Links de navegação (DIV em vez de nav para evitar nav aninhado — HTML inválido) -->
@@ -278,7 +281,7 @@
       <!-- Coluna esquerda: conteúdo textual + CTAs + estatísticas -->
       <div class="hero-left">
         <!-- Tag de credencial acima do título -->
-        <span class="hero-eyebrow">Corretor Imobiliário · CRECI 1816-J</span>
+        <span class="hero-eyebrow" id="display-eyebrow"></span>
 
         <!-- H1: deve existir apenas uma vez por página — fundamental para SEO -->
         <h1 class="hero-title">
@@ -349,8 +352,8 @@
         <div class="badge-creci" aria-label="CRECI ativo">
           <div class="badge-dot" aria-hidden="true"></div>
           <div>
-            <div class="badge-label">Victor Araújo</div>
-            <div class="badge-sub">CRECI 1816-J · Ativo</div>
+            <div class="badge-label" id="display-badge-nome"></div>
+            <div class="badge-sub" id="display-badge-creci"></div>
           </div>
         </div>
       </div>
@@ -420,7 +423,7 @@
           <li class="cred-row">
             <div class="cred-ic" aria-hidden="true">🏆</div>
             <div>
-              <div class="cred-name">CRECI 1816-J — Ativo</div>
+              <div class="cred-name" id="display-cred-creci"></div>
               <div class="cred-desc">Credenciado e regular junto ao Conselho Regional de Corretores</div>
             </div>
           </li>
@@ -620,7 +623,7 @@
           <!-- Card escuro com citação -->
           <div class="contact-callout" aria-hidden="true">
             <p class="contact-callout-quote">"Seu imóvel ideal começa com uma conversa — estou aqui para guiar cada passo."</p>
-            <span class="contact-callout-name">— Victor Araújo · Corretor CRECI 1816-J</span>
+            <span class="contact-callout-name" id="display-callout-nome"></span>
           </div>
 
           <p>Seja para comprar, vender ou tirar dúvidas — estou disponível para te atender com atenção e agilidade.</p>
@@ -634,26 +637,24 @@
               <div class="ch-ic" aria-hidden="true">💬</div>
               <div>
                 <div class="ch-lbl">WhatsApp</div>
-                <div class="ch-val">(83) 9 9160-3629</div><!-- PERSONALIZE -->
+                <div class="ch-val" id="display-tel"></div>
               </div>
             </a>
 
-            <!-- PERSONALIZE: substitua pelo perfil real -->
-            <a href="https://instagram.com/victor_barbosaa_" class="ch-item"
+            <a id="link-instagram" class="ch-item"
                target="_blank" rel="noopener noreferrer" aria-label="Ver perfil no Instagram">
               <div class="ch-ic" aria-hidden="true">📸</div>
               <div>
                 <div class="ch-lbl">Instagram</div>
-                <div class="ch-val">@victor_barbosaa_</div><!-- PERSONALIZE -->
+                <div class="ch-val" id="display-ig"></div>
               </div>
             </a>
 
-            <!-- PERSONALIZE: substitua pelo e-mail real -->
-            <a href="mailto:victorconsolprime@gmail.com" class="ch-item" aria-label="Enviar e-mail">
+            <a id="link-email" class="ch-item" aria-label="Enviar e-mail">
               <div class="ch-ic" aria-hidden="true">✉️</div>
               <div>
                 <div class="ch-lbl">E-mail</div>
-                <div class="ch-val">victorconsolprime@gmail.com</div><!-- PERSONALIZE -->
+                <div class="ch-val" id="display-email"></div>
               </div>
             </a>
           </div>
@@ -707,6 +708,14 @@
             <textarea id="f-msg" name="mensagem" placeholder="Conte um pouco mais sobre o que você procura…"></textarea>
           </div>
 
+          <!-- Consentimento LGPD — obrigatório antes do envio -->
+          <div class="fg lgpd-check-wrap">
+            <label class="lgpd-check-label">
+              <input type="checkbox" id="f-lgpd" name="lgpd">
+              <span>Li e concordo que meus dados (nome e telefone) sejam usados para contato via WhatsApp, conforme a <strong>LGPD</strong>.</span>
+            </label>
+          </div>
+
           <!-- Botão de envio: chama sendWhatsApp() no JS
                type="button" evita comportamento padrão de submit de form -->
           <button class="btn-primary btn-submit" type="button" onclick="sendWhatsApp()"
@@ -736,12 +745,12 @@
            <img class="footer-logo-slot" src="logo-white.png" alt="Imobiliária" height="28"> -->
       <span class="footer-logo-slot" aria-label="Espaço para logo">Logo Empresa</span>
       <div class="footer-div" aria-hidden="true"></div>
-      <span class="footer-name">Victor Araújo</span>
+      <span class="footer-name" id="display-footer-nome"></span>
     </div>
 
     <!-- Copyright — PERSONALIZE: atualize o ano conforme necessário -->
     <div>
-      <p class="footer-copy">© 2025 · CRECI 1816-J · Todos os direitos reservados</p>
+      <p class="footer-copy" id="display-footer-creci"></p>
       <p class="footer-copy" style="text-align:center;">Desenvolvido por <a href="https://www.instagram.com/dev_axys" target="_blank" rel="noopener noreferrer">DevAxys</a></p>
     </div>
 
@@ -754,6 +763,23 @@
          target="_blank" rel="noopener noreferrer" aria-label="WhatsApp de Victor Araújo">wa</a>
     </div>
   </footer>
+
+  <!-- ══ BANNER LGPD / PRIVACIDADE ══════════════════════════════
+       Exibido na primeira visita. Consent salvo em localStorage.
+  ═══════════════════════════════════════════════════════════ -->
+  <div id="lgpd-banner" class="lgpd-banner" role="dialog" aria-label="Aviso de privacidade" hidden>
+    <div class="lgpd-content">
+      <p class="lgpd-text">
+        Este site coleta <strong>nome e telefone</strong> no formulário de contato com a finalidade
+        exclusiva de encaminhar sua mensagem ao corretor via WhatsApp. Nenhum dado é armazenado em
+        servidores. Em conformidade com a <strong>LGPD (Lei 13.709/2018)</strong>.
+      </p>
+      <div class="lgpd-actions">
+        <button class="lgpd-accept" onclick="aceitarLGPD()" aria-label="Aceitar e fechar aviso">Entendi e aceito</button>
+        <a href="https://www.gov.br/anpd/pt-br" target="_blank" rel="noopener noreferrer" class="lgpd-link">Saiba mais</a>
+      </div>
+    </div>
+  </div>
 
   <!-- Scripts do portfólio -->
   <script src="Scripts.js"></script>
