@@ -248,7 +248,7 @@
        Tamanho recomendado: 600×900px PNG com canal alpha (fundo transparente).
        loading="eager" + fetchpriority="high" = carrega com prioridade máxima (LCP) */
     .foto-hero {
-      width: 88%; max-width: 440px;
+      width: 88%; max-width: 660px;
       object-fit: contain; object-position: bottom center;
       filter: drop-shadow(0 24px 48px rgba(62,44,30,.20)); /* sombra integra PNG no cenário */
       aspect-ratio: 2/3;   /* reserva espaço proporcional antes da imagem carregar (evita CLS) */
