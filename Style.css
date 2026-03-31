@@ -279,10 +279,11 @@
     .banner-img {
       width: 100%; height: 100%;
       object-fit: cover;            /* cobre sem distorcer */
-      object-position: center 35%; /* centraliza levemente acima do meio */
+      object-position: center 45%; /* centraliza levemente acima do meio */
       display: block;
       filter: saturate(.88) brightness(.97); /* leve dessaturação para tom mais elegante */
-    }
+      filter: blur(5px);
+  }
 
     /* Overlay gradiente (esquerda escura → direita transparente) para criar contraste com o texto */
     .banner-overlay {
