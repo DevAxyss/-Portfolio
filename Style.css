@@ -622,18 +622,40 @@
     }
     .lgpd-link:hover { color: rgba(247,243,238,.75); }
 
-    /* Checkbox de consentimento no formulário */
+    /* Checkbox de consentimento no formulário — custom com ✕ */
     .lgpd-check-wrap { margin-top: 4px; }
 
     .lgpd-check-label {
       display: flex; align-items: flex-start; gap: 10px;
       font-size: .78rem; color: rgba(62,44,30,.65);
-      cursor: pointer; line-height: 1.5;
+      cursor: pointer; line-height: 1.5; user-select: none;
     }
+    /* Esconde o input nativo mas mantém acessível */
     .lgpd-check-label input[type="checkbox"] {
-      margin-top: 2px; flex-shrink: 0;
-      accent-color: var(--accent);
-      width: 15px; height: 15px; cursor: pointer;
+      position: absolute; opacity: 0; width: 0; height: 0; pointer-events: none;
+    }
+    /* Caixa customizada */
+    .lgpd-check-label .chk-box {
+      flex-shrink: 0; margin-top: 1px;
+      width: 18px; height: 18px;
+      border: 1.5px solid var(--accent);
+      border-radius: 4px;
+      display: flex; align-items: center; justify-content: center;
+      transition: background .15s, border-color .15s;
+      background: transparent;
+      font-size: 13px; font-weight: 700; color: #fff;
+    }
+    /* Marcado: fundo colorido + ✕ */
+    .lgpd-check-label input[type="checkbox"]:checked + .chk-box {
+      background: var(--accent);
+    }
+    .lgpd-check-label input[type="checkbox"]:checked + .chk-box::after {
+      content: '✕';
+    }
+    /* Foco via teclado */
+    .lgpd-check-label input[type="checkbox"]:focus-visible + .chk-box {
+      outline: 2px solid var(--accent);
+      outline-offset: 2px;
     }
     .lgpd-check-label strong { color: var(--accent-dk); }
 
