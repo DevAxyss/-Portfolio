@@ -65,11 +65,9 @@
           : baseUrl);
       });
 
-      /* ── Links Instagram no rodapé e demais ── */
-      document.querySelectorAll('a[href*="instagram.com/"]').forEach(function(el) {
-        if (el.id !== 'link-instagram') {
-          el.setAttribute('href', CORRETOR.instagramUrl);
-        }
+      /* ── Links Instagram no rodapé e demais (ignora data-static) ── */
+      document.querySelectorAll('a[href*="instagram.com/"]:not([data-static])').forEach(function(el) {
+        el.setAttribute('href', CORRETOR.instagramUrl);
       });
 
       /* ── Título da aba do navegador ── */
