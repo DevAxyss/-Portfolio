@@ -484,7 +484,7 @@
 
     /* Slot de logo no footer — mesmo conceito da nav
        COMO USAR: <img class="footer-logo-slot" src="logo-white.png" alt="Empresa" height="28"> */
-    .footer-logo-slot { height: 28px; padding: 0 10px; background: rgba(247,243,238,.12); border: 1px dashed rgba(247,243,238,.25); border-radius: 6px; font-size: .62rem; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; color: rgba(247,243,238,.45); display: flex; align-items: center; white-space: nowrap; }
+    .footer-brand img { height: 34px; width: auto; display: flex; align-items: center; }
     .footer-div  { width: 1px; height: 18px; background: rgba(247,243,238,.2); } /* divisor vertical */
     .footer-name { font-family: 'Playfair Display', serif; font-size: 1.05rem; color: var(--accent-lt); letter-spacing: .05em; }
     .footer-copy { font-size: .71rem; color: rgba(247,243,238,.4); } /* texto de copyright */
