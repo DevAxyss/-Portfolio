@@ -646,14 +646,14 @@
       display: flex; align-items: center; justify-content: center;
       transition: background .15s, border-color .15s;
       background: transparent;
-      font-size: 13px; font-weight: 700; color: #fff;
+      font-size: 13px; font-weight: 600; color: #fff;
     }
-    /* Marcado: fundo colorido + ✕ */
+    /* Marcado: fundo colorido + ✔ */
     .lgpd-check-label input[type="checkbox"]:checked + .chk-box {
       background: var(--accent);
     }
     .lgpd-check-label input[type="checkbox"]:checked + .chk-box::after {
-      content: '✕';
+      content: '✔';
       display: block;
       line-height: 1;
       text-align: center;
