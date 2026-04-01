@@ -370,7 +370,8 @@
     .section-header .accent-bar { margin: 0 auto; } /* centraliza a barra decorativa */
 
     /* Grade de 3 colunas iguais */
-    .services-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+    .services-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; justify-items: center; }
+    .services-grid:has(.service-card:nth-child(2):last-child) { grid-template-columns: repeat(2, minmax(0, 360px)); justify-content: center; }
 
     /* Card individual de serviço */
     .service-card { padding: 32px 26px; border-radius: var(--r-lg); background: var(--sand); border: 1px solid var(--border); transition: transform .3s, box-shadow .3s, border-color .3s; }
@@ -623,10 +624,12 @@
     .lgpd-link:hover { color: rgba(247,243,238,.75); }
 
     /* Checkbox de consentimento no formulário — custom com ✕ */
-    .lgpd-check-wrap { margin-top: 4px; }
+    .lgpd-check-wrap { 
+      margin-top: 4px; 
+    }
 
     .lgpd-check-label {
-      display: flex; align-items: flex-start; gap: 10px;
+      display: flex; align-items: center; gap: 10px;
       font-size: .78rem; color: rgba(62,44,30,.65);
       cursor: pointer; line-height: 1.5; user-select: none;
     }
@@ -636,7 +639,7 @@
     }
     /* Caixa customizada */
     .lgpd-check-label .chk-box {
-      flex-shrink: 0; margin-top: 1px;
+      flex-shrink: 0;
       width: 18px; height: 18px;
       border: 1.5px solid var(--accent);
       border-radius: 4px;
@@ -651,6 +654,9 @@
     }
     .lgpd-check-label input[type="checkbox"]:checked + .chk-box::after {
       content: '✕';
+      display: block;
+      line-height: 1;
+      text-align: center;
     }
     /* Foco via teclado */
     .lgpd-check-label input[type="checkbox"]:focus-visible + .chk-box {

@@ -143,12 +143,13 @@
        Resultado: o lead chega qualificado com nome, interesse, valor e telefone.
        Não usa backend nem banco de dados — tudo via link wa.me (ideal para o MVP).
     ────────────────────────────────────────────────────── */
+
     /* Remove tags HTML e caracteres de controle dos inputs do formulário.
        Evita injeção de conteúdo malicioso na URL gerada para o WhatsApp. */
     function sanitize(str) {
       return str
         .replace(/<[^>]*>/g, '')          /* remove qualquer tag HTML */
-        .replace(/[^\w\s@.,;:()\-+]/gu, '')  /* mantém apenas chars seguros */
+        .replace(/[^\w\s@.,;:()\-+R$]/gu, '')  /* mantém apenas chars seguros */
         .trim();
     }
 
@@ -191,6 +192,46 @@
       /* Abre o WhatsApp em nova aba com segurança */
       window.open(urlWhatsApp, '_blank', 'noopener,noreferrer');
     }
+
+
+    /* ──────────────────────────────────────────────────────
+       MÁSCARAS DE FORMATAÇÃO — Telefone e Valor
+       Aplicadas em tempo real conforme o usuário digita.
+    ────────────────────────────────────────────────────── */
+
+    /* Telefone: (00) 0000-0000  ou  (00) 9 0000-0000  */
+    function mascaraTelefone(e) {
+      var digits = e.target.value.replace(/\D/g, '').slice(0, 11);
+      if (!digits) { e.target.value = ''; return; }
+      var f;
+      if (digits.length <= 10) {
+        /* Fixo: (00) 0000-0000 */
+        f = '(' + digits.slice(0, 2) + ')';
+        if (digits.length > 2) f += ' ' + digits.slice(2, 6);
+        if (digits.length > 6) f += '-' + digits.slice(6);
+      } else {
+        /* Celular: (00) 0 0000-0000 */
+        f = '(' + digits.slice(0, 2) + ') '
+          + digits.slice(2, 3) + ' '
+          + digits.slice(3, 7) + '-'
+          + digits.slice(7);
+      }
+      e.target.value = f;
+    }
+
+    /* Valor: R$ 1.000.000 */
+    function mascaraValor(e) {
+      var digits = e.target.value.replace(/\D/g, '').slice(0, 10);
+      if (!digits) { e.target.value = ''; return; }
+      e.target.value = 'R$ ' + parseInt(digits, 10).toLocaleString('pt-BR');
+    }
+
+    document.addEventListener('DOMContentLoaded', function() {
+      var elTel   = document.getElementById('f-tel');
+      var elValor = document.getElementById('f-valor');
+      if (elTel)   elTel.addEventListener('input', mascaraTelefone);
+      if (elValor) elValor.addEventListener('input', mascaraValor);
+    });
 
 
     /* ──────────────────────────────────────────────────────
