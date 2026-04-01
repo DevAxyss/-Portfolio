@@ -484,10 +484,13 @@
 
     /* Slot de logo no footer — mesmo conceito da nav
        COMO USAR: <img class="footer-logo-slot" src="logo-white.png" alt="Empresa" height="28"> */
+    .devsite{color: rgba(247,243,238,.4)}
     .footer-brand img { height: 34px; width: auto; display: flex; align-items: center; }
     .footer-div  { width: 1px; height: 18px; background: rgba(247,243,238,.2); } /* divisor vertical */
     .footer-name { font-family: 'Playfair Display', serif; font-size: 1.05rem; color: var(--accent-lt); letter-spacing: .05em; }
     .footer-copy { font-size: .71rem; color: rgba(247,243,238,.4); } /* texto de copyright */
+    .devsite { color: rgba(247,243,238,.75); transition: color .2s; }
+    .devsite:hover { color: #fff; }
     .footer-social { display: flex; gap: 10px; } /* ícones sociais */
     .soc { width: 34px; height: 34px; border-radius: 50%; border: 1px solid rgba(247,243,238,.18); display: flex; align-items: center; justify-content: center; font-size: .72rem; font-weight: 700; color: rgba(247,243,238,.5); transition: border-color .25s, color .25s; }
     .soc:hover { border-color: var(--accent-lt); color: var(--accent-lt); }
