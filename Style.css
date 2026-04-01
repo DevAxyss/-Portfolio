@@ -107,7 +107,7 @@
 
     /* Wrapper do slot de logo da empresa
        COMO USAR: substitua o <span> por <img src="logo.png" alt="Imobiliária"> */
-    .nav-logo-empresa { height: 34px; width: auto; display: flex; align-items: center; }
+    .nav-logo-empresa img { height: 34px; width: auto; display: flex; align-items: center; }
 
     /* Placeholder visual enquanto não há logo real — borda tracejada estilo "cole aqui" */
     .nav-logo-placeholder {
